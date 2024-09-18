@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
             url.pathname === '/verify'
         )
     ) {
-        return NextResponse.redirect(new URL('/sign-in', request.url));
+        return NextResponse.redirect(new URL('/sign-up', request.url));
     }
     return NextResponse.next();
 }

@@ -1,8 +1,12 @@
 import { openai } from '@ai-sdk/openai';
 import { streamText, StreamData } from 'ai';
+import OpenAI from 'openai/index.mjs';
 
 // Allow streaming responses up to 60 seconds
 export const maxDuration = 60;
+const openAi = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+})
 
 export async function POST(req: Request) {
     try {
@@ -20,7 +24,6 @@ export async function POST(req: Request) {
             data.close();
             },
         });
-
         return result.toDataStreamResponse({ data });
     } catch (error) {
         console.log('error ', error)
