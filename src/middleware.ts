@@ -6,27 +6,24 @@ export async function middleware(request: NextRequest) {
     const token = await getToken({ req: request });
     const url = request.nextUrl;
 
+    const isAuthRoute = ['/sign-in', '/sign-up', '/verify'].some((path) =>
+        url.pathname.startsWith(path)
+    );
+
     // Redirect authenticated users away from auth pages
-    if (token && 
-        (
-            url.pathname === '/sign-in' ||
-            url.pathname === '/sign-up' ||
-            url.pathname === '/verify'
-        )
-    ) {
+    if (token && isAuthRoute) {
         return NextResponse.redirect(new URL('/dashboard', request.url));
     }
 
-    // Redirect unauthenticated users away from protected pages
-    if (!token && 
-        !(
-            url.pathname === '/sign-in' ||
-            url.pathname === '/sign-up' ||
-            url.pathname === '/verify'
-        )
-    ) {
+    // Redirect unauthenticated users away from protected pages, excluding `/verify`
+    const isProtectedRoute = ['/dashboard'].some((path) =>
+        url.pathname.startsWith(path)
+    );
+
+    if (!token && isProtectedRoute) {
         return NextResponse.redirect(new URL('/sign-up', request.url));
     }
+
     return NextResponse.next();
 }
 
@@ -37,6 +34,5 @@ export const config = {
     '/sign-up',
     '/',
     '/verify/:path*',
-    '/dashboard/:path*',
   ]
 }
