@@ -49,16 +49,6 @@ Make sure you have the following installed:
 
 5. Open your browser and go to http://localhost:3000 to see the application in action.
 
-## Contributing
-
-Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
-
-## Acknowledgements
-
-This project was inspired by the YouTube tutorial [How to Build a Feedback App with Next.js](https://www.youtube.com/watch?v=zLJoVRleOuc) by Hitesh Choudhary. You can find the original project on GitHub [here](https://github.com/hiteshchoudhary/ama-app).
-
-Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
-
 ## Screenshots
 
 Here are some screenshots of the Genuine Feedback application:
@@ -74,3 +64,13 @@ Here are some screenshots of the Genuine Feedback application:
 
 ### User Unique Link
 ![User Unique Link](screenshots/UserUniqueLink.png)
+
+## Contributing
+
+Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
+
+## Acknowledgements
+
+This project was inspired by the YouTube tutorial [How to Build a Feedback App with Next.js](https://www.youtube.com/watch?v=zLJoVRleOuc) by Hitesh Choudhary. You can find the original project on GitHub [here](https://github.com/hiteshchoudhary/ama-app).
+
+Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
