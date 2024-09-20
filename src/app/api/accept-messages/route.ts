@@ -25,7 +25,7 @@ export async function POST(request: Request){
     try {
         const updatedUser = await UserModel.findByIdAndUpdate(
             userId,
-            {isAcceptingMessage: true},
+            {isAcceptingMessage: acceptMessages},
             {new: true}
         )
         if(!updatedUser){
@@ -56,49 +56,52 @@ export async function POST(request: Request){
     }
 }
 
-export async function GET(request: Request){
-    await dbConnect()
+export async function GET(request: Request) {
+    await dbConnect();
 
-    const session = await getServerSession(authOptions)
-    const user:User = session?.user as User
+    const session = await getServerSession(authOptions);
+    const user: User = session?.user as User;
 
-    if(!session || !session.user){
+    if (!session || !session.user) {
         return Response.json({
             success: false,
             message: 'Not authenticated.'
-        },{
+        }, {
             status: 401
-        })
+        });
     }
 
     const userId = user._id;
 
     try {
-        const foundUser = await UserModel.findById({userId: userId})
-        if(!foundUser){
-            console.log("Failed to find user.")
+        // Fixing the query to directly use userId
+        const foundUser = await UserModel.findById(userId);
+        
+        if (!foundUser) {
+            console.log("Failed to find user.");
             return Response.json({
                 success: false,
                 message: 'Failed to find user!'
-            },{
+            }, {
                 status: 404
-            })
+            });
         }
+
         return Response.json({
             success: true,
             isAcceptingMessages: foundUser.isAcceptingMessage,
             message: 'User found!'
-        },{
+        }, {
             status: 200
-        })
+        });
     } catch (error) {
-        console.log("Error finding user. ", error)
-            return Response.json({
-                success: false,
-                message: 'Failed to find user!'
-            },{
-                status: 500
-            })
+        console.error("Error finding user: ", error); // Enhanced logging
+        return Response.json({
+            success: false,
+            message: 'Failed to find user!',
+            error: error, // Optionally include error message
+        }, {
+            status: 500
+        });
     }
-    
 }

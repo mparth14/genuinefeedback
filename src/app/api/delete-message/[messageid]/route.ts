@@ -1,13 +1,14 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/options";
+import { authOptions } from "../../auth/[...nextauth]/options";
 import { dbConnect } from "@/lib/dbConnect";
 import UserModel from "@/model/user";
 import { User } from "next-auth"
-import mongoose from "mongoose";
 
-export async function GET(request: Request){
+export async function DELETE(request: Request, {params} : {params: {messageid: string}}){
+    
+    const messageId = params.messageid
+    
     await dbConnect()
-
     const session = await getServerSession(authOptions)
     const user:User = session?.user as User
 
@@ -20,37 +21,32 @@ export async function GET(request: Request){
         })
     }
 
-    const userId = new mongoose.Types.ObjectId(user._id);
     try {
-        const user = await UserModel.aggregate([
-            { $match: {_id: userId }},
-            { $unwind: '$messages' },
-            { $sort: {'messages.createdAt': -1}},
-            { $group: { _id: '$_id', messages: {$push: '$messages'}}}
-        ])
-        if(!user || user.length === 0){
+        const response = await UserModel.updateOne(
+            {_id: user._id},
+            {$pull: {messages: {_id: messageId}}}
+        )
+        if(response.modifiedCount == 0){
             return Response.json({
                 success: false,
-                message: 'User not found.'
+                message: 'Not found or already deleted.'
             },{
                 status: 404
             })
         }
-
         return Response.json({
             success: true,
-            messages: user[0].messages
+            message: 'Message successfully deleted.'
         },{
-            status: 200
+            status: 201
         })
     } catch (error) {
-        console.log('error ', error)
+        console.error('error in delete message route', error)
         return Response.json({
             success: false,
-            message: 'Internal server error.'
+            message: 'Error deleting message.'
         },{
             status: 500
         })
     }
-    
 }
