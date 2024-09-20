@@ -11,7 +11,9 @@ export async function GET(request: Request) {
     await dbConnect()
 
     try {
-        const {searchParams} = new URL(request.url);
+        const host = request.headers.get('host');
+        const url = `https://${host}`; 
+        const {searchParams} = new URL(request.url);        ;
         const queryParam = {
             username: searchParams.get('username')
         }
