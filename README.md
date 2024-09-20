@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Genuine Feedback
+
+Genuine Feedback is a platform that allows users to create unique URLs to collect anonymous feedback from others. Users can sign up, share their unique links, and receive valuable insights without revealing their identity.
+
+## Features
+
+- **User Registration:** Sign up to create an account.
+- **Unique URLs:** Generate a unique URL for collecting feedback.
+- **Anonymous Feedback:** Share your link with others to receive anonymous responses.
+- **Feedback Management:** View and manage all received feedback easily.
+
+## Tech Stack
+
+- **Frontend:** Next.js, Tailwind CSS
+- **Authentication:** NextAuth
+- **Data Validation:** Zod
+- **Database:** MongoDB
+- **Email Service:** Resend
+- **OpenAI Integration:** Suggest feedbacks to user
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Make sure you have the following installed:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js
+- MongoDB
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repository:
 
-## Learn More
+   ```bash
+   git clone https://github.com/mparth14/genuinefeedback.git
+   cd genuine-feedback
 
-To learn more about Next.js, take a look at the following resources:
+2. Install the dependencies:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Set up your environment variables in a .env file. You can use the .env.example file as a reference.
 
-## Deploy on Vercel
+4. Start the development server:
+    
+    ```bash
+    npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. Open your browser and go to http://localhost:3000 to see the application in action.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contributing
+
+Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
+
+## Acknowledgements
+
+This project was inspired by the YouTube tutorial [How to Build a Feedback App with Next.js](https://www.youtube.com/watch?v=zLJoVRleOuc) by Hitesh Choudhary. You can find the original project on GitHub [here](https://github.com/hiteshchoudhary/ama-app).
+
+Contributions are welcome! If you have suggestions for improvements or features, feel free to open an issue or submit a pull request.
+
+## Screenshots
+
+Here are some screenshots of the Genuine Feedback application:
+
+### Home Page
+![Home Page](screenshots/HomePage.png)
+
+### Sign In Page
+![Sign In Page](screenshots/SignInPage.png)
+
+### User Dashboard
+![User Dashboard](screenshots/UserDashboard.png)
+
+### User Unique Link
+![User Unique Link](screenshots/UserUniqueLink.png)
