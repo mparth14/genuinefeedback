@@ -117,4 +117,33 @@ describe('UserDashboard', () => {
       expect((axios.delete as jest.Mock)).toHaveBeenCalledWith(`/api/delete-message/1`)
     });
   });  
+
+  it('shows an error toast when the delete call fails', async () => {
+    render(<UserDashboard />);
+    
+    await waitFor(() => {
+        expect(screen.getByText('Message 1')).toBeInTheDocument();
+        expect(screen.getByText('Message 2')).toBeInTheDocument();
+    });
+
+    // Simulate deleting the first message
+    const deleteButton = screen.getAllByRole('button', { name: /delete/i })[0];
+    fireEvent.click(deleteButton);
+
+    // Confirm deletion
+    const continueButton = await screen.findByRole('button', { name: /continue/i });
+    fireEvent.click(continueButton);
+
+    // Mocking the delete API call to simulate an error
+    (axios.delete as jest.Mock).mockRejectedValueOnce({
+      response: {
+          data: { message: 'Error deleting message.', success: false },
+      },
+    });
+
+    await waitFor(() => {
+      expect(axios.delete).toHaveBeenCalledWith(`/api/delete-message/1`);
+    });
+  });
+
 });
