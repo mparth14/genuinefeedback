@@ -62,8 +62,7 @@ jobs:
 
       # Step 3: Build Docker image with secrets as build args
       - name: Build Docker image
-        run: |
-          docker build -t --build-arg RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} --build-arg OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} pmodi1080/genuinefeedback:${{ github.sha }} .
+        run: docker build -t  pmodi1080/genuinefeedback:${{ github.sha }} --build-arg RESEND_API_KEY=${{ secrets.RESEND_API_KEY }} --build-arg MONGODB_URI=${{ secrets.MONGODB_URI }} --build-arg NEXTAUTH_SECRET=${{ secrets.NEXTAUTH_SECRET }} --build-arg OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} .
 
       # Step 4: Push Docker image to Docker Hub
       - name: Push Docker image
