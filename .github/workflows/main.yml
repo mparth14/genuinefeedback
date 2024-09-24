@@ -35,6 +35,11 @@ jobs:
       #Step 5: Build project
       - name: 'build'
         run: npm run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       
       #Step 6: Run unit tests
       - name: 'tests'
@@ -57,14 +62,15 @@ jobs:
 
       # Step 3: Build Docker image
       - name: Build Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:${{ github.sha }} .
+        run: docker build -t pmodi1080/genuinefeedback:${{ github.sha }} .
+
 
       # Step 4: Push Docker image to Docker Hub
       - name: Push Docker image
-        run: docker push ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:${{ github.sha }}
+        run: docker push pmodi1080/genuinefeedback:${{ github.sha }}
 
       # Step 5: Tag the latest image
       - name: Tag Docker image as latest
         run: |
-          docker tag ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:latest
+          docker tag pmodi1080/genuinefeedback:${{ github.sha }} pmodi1080/genuinefeedback:latest
+          docker push pmodi1080/genuinefeedback:latest
