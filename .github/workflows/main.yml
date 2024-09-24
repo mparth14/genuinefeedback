@@ -64,6 +64,7 @@ jobs:
       - name: Build Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:${{ github.sha }} .
 
+
       # Step 4: Push Docker image to Docker Hub
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:${{ github.sha }}
