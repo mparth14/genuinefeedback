@@ -1,18 +1,12 @@
 'use client'
 import * as z from "zod";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useDebounceValue } from "usehooks-ts";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUpSchemaValidation } from "@/schemas/signUpSchema";
-import axios, { AxiosError } from "axios";
-import { ApiResponse } from "@/types/ApiResponse";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -21,7 +15,6 @@ import {
 import { Button } from "@/components/ui/button"
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input"
-import { Loader2 } from "lucide-react";
 import { signInSchemaValidation } from "@/schemas/signInSchema";
 import { signIn } from "next-auth/react";
 
