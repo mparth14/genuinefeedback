@@ -4,11 +4,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel"
 import React from "react";
-import Autoplay from "embla-carousel-autoplay"
 import { Mail } from 'lucide-react';
 import messages from '@/messages.json';
 
@@ -27,7 +24,6 @@ const Home = () => {
         </section>
 
         <Carousel
-          plugins={[Autoplay({ delay: 2000 })]}
           className="w-full max-w-lg md:max-w-xl"
         >
           <CarouselContent>

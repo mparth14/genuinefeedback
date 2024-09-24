@@ -63,14 +63,11 @@ const UserDashboard = () => {
         try {
           const response = await axios.get<ApiResponse>("/api/get-messages");
           
-          // Log the fetched data to check its structure
           console.log("Fetched messages: ", response.data.messages);
       
-          // Ensure the messages state is being updated properly
           const fetchedMessages = response.data.messages || [];
           setMessages(fetchedMessages);
       
-          // Log the state after updating
           console.log("Messages state after setting: ", fetchedMessages);
       
           if (refresh) {
@@ -185,7 +182,7 @@ const UserDashboard = () => {
           }}
       >
           {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <Loader2 className="h-4 w-4 animate-spin" >Loading</Loader2>
           ) : (
               <RefreshCcw className="h-4 w-4" />
           )}

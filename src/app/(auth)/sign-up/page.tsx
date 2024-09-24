@@ -113,8 +113,9 @@ export default function SignUpForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel htmlFor="username">Username</FormLabel>
                   <Input
+                    id='username'
                     placeholder='Please enter your username'
                     {...field}
                     onChange={(e) => {
@@ -143,8 +144,8 @@ export default function SignUpForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <Input placeholder='Please enter your email' {...field} name="email" />
+                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <Input id='email' placeholder='Please enter your email' {...field} name="email" />
                   <p className='text-muted text-gray-400 text-sm'>We will send you a verification code</p>
                   <FormMessage />
                 </FormItem>
@@ -156,8 +157,8 @@ export default function SignUpForm() {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <Input placeholder='Please enter your password' type="password" {...field} name="password" />
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <Input id='password' placeholder='Please enter your password' type="password" {...field} name="password" />
                   <FormMessage />
                 </FormItem>
               )}

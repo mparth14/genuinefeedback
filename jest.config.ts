@@ -14,7 +14,12 @@ const config: Config = {
     // Map the alias `@/` to the `src` folder
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  "reporters": [
+    "default",
+    ["./node_modules/jest-html-reporter", {
+      "pageTitle": "Test Report"
+    }]
+  ]
 };
 
-// createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
 export default createJestConfig(config);
