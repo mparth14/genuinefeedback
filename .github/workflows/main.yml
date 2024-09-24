@@ -35,6 +35,11 @@ jobs:
       #Step 5: Build project
       - name: 'build'
         run: npm run build
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       
       #Step 6: Run unit tests
       - name: 'tests'
