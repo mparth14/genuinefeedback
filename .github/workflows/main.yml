@@ -10,7 +10,7 @@ on:
       - main
   
 jobs:
-  Build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,28 +28,20 @@ jobs:
       - name: 'install dep'
         run: npm ci
       
+      #Step 4: run linting
+      - name: 'run linting'
+        run: npm run lint
+      
       #Step 5: Build project
       - name: 'build'
         run: npm run build
-
-  Lint:
-    runs-on: ubuntu-latest
-
-    steps:
-    #Step 1: run linting
-      - name: 'run linting'
-        run: npm run lint
-
-  Test:
-    runs-on: ubuntu-latest
-
-    steps:
-    #Step 1: Run unit tests
+      
+      #Step 6: Run unit tests
       - name: 'tests'
         run: npm run test
     
   docker:
-    needs: Build
+    needs: build
     runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout code
@@ -76,5 +68,3 @@ jobs:
         run: |
           docker tag ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:${{ github.sha }} ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/genuinefeedback:latest
-      
-      
