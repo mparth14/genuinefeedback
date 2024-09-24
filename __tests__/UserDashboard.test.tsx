@@ -1,11 +1,8 @@
-// UserDashboard.test.tsx
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
-import { useToast } from "@/components/ui/use-toast";
 import UserDashboard from "@/app/(app)/dashboard/page";
-import { act } from 'react-dom/test-utils';
-import '@testing-library/jest-dom'; // to use matchers like toBeInTheDocument
+import '@testing-library/jest-dom';
 
 jest.mock('next-auth/react');
 jest.mock('axios');
@@ -75,7 +72,6 @@ describe('UserDashboard', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
   
     await waitFor(() => {
-      // Ensure the loading state is no longer present
       expect(screen.queryByText(/loading/i)).not.toBeInTheDocument();
   
       expect(screen.getByText(/No messages to display/i)).toBeInTheDocument();
@@ -95,5 +91,30 @@ describe('UserDashboard', () => {
     // Check that the switch toggles to the "on" state
     expect(switchElement).toHaveAttribute('aria-checked', 'true');
   });
-  
+
+  it('deletes a message when the delete button is clicked', async () => {
+    render(<UserDashboard />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Message 1')).toBeInTheDocument();
+      expect(screen.getByText('Message 2')).toBeInTheDocument();
+    })
+    
+    // Simulate deleting the first message
+    const deleteButton = screen.getAllByRole('button', { name: /delete/i })[0];
+    fireEvent.click(deleteButton)
+    
+    // Confirm deletion
+    const continueButton = await screen.findByRole('button', { name: /continue/i });
+    fireEvent.click(continueButton);
+
+    (axios.delete as jest.Mock).mockResolvedValueOnce({
+      data: { message: 'Message deleted successfully.' },
+    });
+    
+    // Verify that the first message is removed from the document
+    await waitFor(() => {
+      expect((axios.delete as jest.Mock)).toHaveBeenCalledWith(`/api/delete-message/1`)
+    });
+  });  
 });

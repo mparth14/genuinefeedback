@@ -1,11 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import Page from '@/app/(auth)/sign-in/page'; // Adjust the import path as necessary
+import Page from '@/app/(auth)/sign-in/page';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';
-import { RouterContext } from 'next/dist/shared/lib/router-context.shared-runtime';
 import '@testing-library/jest-dom';
-import { useRouter } from 'next/navigation';
-
 
 jest.mock('next-auth/react', () => ({
     signIn: jest.fn(),
