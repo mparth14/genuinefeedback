@@ -14,26 +14,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #Step 1: checkout code
+      # Step 1: checkout code
       - name: 'Clone repository'
         uses: actions/checkout@v3
 
-      #Step 2: setup node env
-      - name: 'setup node env'
-        uses: actions/checkout@v3
+      # Step 2: setup node env
+      - name: 'Setup Node.js'
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       
-      #Step 3: install dependencies and packages
-      - name: 'install dep'
+      # Step 3: install dependencies and packages
+      - name: 'Install dependencies'
         run: npm ci
       
-      #Step 4: run linting
-      - name: 'run linting'
+      # Step 4: run linting
+      - name: 'Run linting'
         run: npm run lint
       
-      #Step 5: Build project
-      - name: 'build'
+      # Step 5: Build project
+      - name: 'Build'
         run: npm run build
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -41,8 +41,8 @@ jobs:
           NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       
-      #Step 6: Run unit tests
-      - name: 'tests'
+      # Step 6: Run unit tests
+      - name: 'Run tests'
         run: npm run test
     
   docker:
@@ -53,8 +53,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       
-      # Step 2: Sign in Docker Hub
-      - name: Sign in Docker Hub
+      # Step 2: Sign in to Docker Hub
+      - name: Sign in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
