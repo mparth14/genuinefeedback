@@ -10,7 +10,7 @@ on:
       - main
   
 jobs:
-  build:
+  Build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,15 +28,17 @@ jobs:
       - name: 'install dep'
         run: npm ci
       
-      #Step 4: run linting
-      - name: 'run linting'
-        run: npm run lint
-      
       #Step 5: Build project
       - name: 'build'
         run: npm run build
-      
-      #Step 6: Run unit tests
+
+  Lint:
+    #Step 1: run linting
+      - name: 'run linting'
+        run: npm run lint
+
+  Test:
+    #Step 1: Run unit tests
       - name: 'tests'
         run: npm run test
     
