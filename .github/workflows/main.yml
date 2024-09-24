@@ -33,17 +33,23 @@ jobs:
         run: npm run build
 
   Lint:
+    runs-on: ubuntu-latest
+
+    steps:
     #Step 1: run linting
       - name: 'run linting'
         run: npm run lint
 
   Test:
+    runs-on: ubuntu-latest
+
+    steps:
     #Step 1: Run unit tests
       - name: 'tests'
         run: npm run test
     
   docker:
-    needs: build
+    needs: Build
     runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout code
