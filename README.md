@@ -12,6 +12,7 @@ Genuine Feedback is a platform that allows users to create unique URLs to collec
 ## Tech Stack
 
 - **Frontend:** Next.js, Tailwind CSS
+- **Unit Test:** Jest
 - **Authentication:** NextAuth
 - **Data Validation:** Zod
 - **Database:** MongoDB
