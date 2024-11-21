@@ -1,0 +1,32 @@
+FROM node:18 as builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+
+ARG RESEND_API_KEY
+ARG MONGODB_URI
+ARG NEXTAUTH_SECRET
+ARG OPENAI_API_KEY
+
+ENV RESEND_API_KEY=$RESEND_API_KEY
+ENV MONGODB_URI=$MONGODB_URI
+ENV NEXTAUTH_SECRET=$NEXTAUTH_SECRET
+ENV OPENAI_API_KEY=$OPENAI_API_KEY
+
+
+RUN npm run build
+
+#Stage 2: Deploy
+FROM node:18-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app ./
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
